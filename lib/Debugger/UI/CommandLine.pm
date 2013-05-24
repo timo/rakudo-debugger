@@ -11,7 +11,6 @@ sub eval_in_ctx($ctx, $code) {
     my $compiler := pir::compreg__PS('perl6');
     my $vm_ctx   := nqp::getattr(nqp::p6decont($ctx), PseudoStash, '$!ctx');
     my $pbc      := $compiler.compile($code, :outer_ctx($vm_ctx), :global(GLOBAL));
-    nqp::atpos($pbc, 0).set_outer_ctx($vm_ctx);
     $pbc();
 }
 
